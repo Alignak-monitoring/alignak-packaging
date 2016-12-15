@@ -64,12 +64,13 @@ case "$1" in
 
         else
             systemctl daemon-reload > /dev/null || :
-            systemctl enable alignak-arbiter > /dev/null || :
-            systemctl enable alignak-scheduler > /dev/null || :
-            systemctl enable alignak-poller > /dev/null || :
-            systemctl enable alignak-broker > /dev/null || :
-            systemctl enable alignak-reactionner > /dev/null || :
-            systemctl enable alignak-receiver > /dev/null || :
+            systemctl enable alignak-arbiter.service > /dev/null || :
+            systemctl enable alignak-scheduler.service > /dev/null || :
+            systemctl enable alignak-poller.service > /dev/null || :
+            systemctl enable alignak-broker.service > /dev/null || :
+            systemctl enable alignak-reactionner.service > /dev/null || :
+            systemctl enable alignak-receiver.service > /dev/null || :
+            systemctl enable alignak.service > /dev/null || :
         fi
 
     ;;

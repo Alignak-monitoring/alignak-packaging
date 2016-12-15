@@ -123,19 +123,14 @@ rm -rf %{buildroot}
 /bin/systemctl daemon-reload >/dev/null 2>&1 || :
 
 %preun
+/bin/systemctl --no-reload disable %{name}.service > /dev/null 2>&1 || :
 /bin/systemctl --no-reload disable %{name}-arbiter.service > /dev/null 2>&1 || :
 /bin/systemctl --no-reload disable %{name}-scheduler.service > /dev/null 2>&1 || :
 /bin/systemctl --no-reload disable %{name}-poller.service > /dev/null 2>&1 || :
 /bin/systemctl --no-reload disable %{name}-receiver.service > /dev/null 2>&1 || :
 /bin/systemctl --no-reload disable %{name}-broker.service > /dev/null 2>&1 || :
 /bin/systemctl --no-reload disable %{name}-reactionner.service > /dev/null 2>&1 || :
-/bin/systemctl stop %{name}-arbiter.service > /dev/null 2>&1 || :
-/bin/systemctl stop %{name}-scheduler.service > /dev/null 2>&1 || :
-/bin/systemctl stop %{name}-poller.service > /dev/null 2>&1 || :
-/bin/systemctl stop %{name}-receiver.service > /dev/null 2>&1 || :
-/bin/systemctl stop %{name}-broker.service > /dev/null 2>&1 || :
-/bin/systemctl stop %{name}-reactionner.service > /dev/null 2>&1 || :
-
+/bin/systemctl stop %{name}.service > /dev/null 2>&1 || :
 
 %postun
 /bin/systemctl daemon-reload >/dev/null 2>&1 || :

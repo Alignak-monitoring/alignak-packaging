@@ -1,6 +1,8 @@
 [Unit]
 Description=Alignak Reactionner
 After=syslog.target
+PartOf=alignak.service
+ReloadPropagatedFrom=alignak.service
 
 [Service]
 Type=forking

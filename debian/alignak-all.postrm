@@ -38,12 +38,13 @@ case "$1" in
 
         else
             systemctl daemon-reload > /dev/null || :
-            systemctl disable alignak-arbiter > /dev/null || :
-            systemctl disable alignak-scheduler > /dev/null || :
-            systemctl disable alignak-poller > /dev/null || :
-            systemctl disable alignak-broker > /dev/null || :
-            systemctl disable alignak-reactionner > /dev/null || :
-            systemctl disable alignak-receiver > /dev/null || :
+            systemctl disable alignak-arbiter.service > /dev/null || :
+            systemctl disable alignak-scheduler.service > /dev/null || :
+            systemctl disable alignak-poller.service > /dev/null || :
+            systemctl disable alignak-broker.service > /dev/null || :
+            systemctl disable alignak-reactionner.service > /dev/null || :
+            systemctl disable alignak-receiver.service > /dev/null || :
+            systemctl disable alignak.service > /dev/null || :
         fi
 
         ## Removes directory permissions

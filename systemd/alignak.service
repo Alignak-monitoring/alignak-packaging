@@ -1,0 +1,19 @@
+# This service is actually a systemd target,
+# but we are using a service since targets cannot be reloaded.
+
+[Unit]
+Description=Alignak service
+After=syslog.target
+Requires=alignak-arbiter.service alignak-poller.service alignak-receiver.service alignak-broker.service alignak-reactionner.service alignak-scheduler.service
+
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/true
+ExecReload=/bin/true
+
+[Install]
+WantedBy=multi-user.target
+
+

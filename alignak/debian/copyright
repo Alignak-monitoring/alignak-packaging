@@ -5,7 +5,7 @@ Source: https://alignak-monitoring.github.io/
 
 Files: *
 Copyright:
- 2015-2015 Alignak team
+ 2015-2017 Alignak team
  2009-2014 Shinken team
  Please see THANKS and AUTHORS for full list of contributors
 License: AGPL-3.0+
@@ -13,7 +13,7 @@ License: AGPL-3.0+
 
 
 Files: debian/*
-Copyright: 2015 Sebastien Coavoux <debian@pyseb.cx>
+Copyright: 2015-2017 Sebastien Coavoux <debian@pyseb.cx>
 License: GPL-2
 
 

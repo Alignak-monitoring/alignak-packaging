@@ -1,7 +1,18 @@
-#bin/init.d/alignak* /etc/init.d/
-#etc/default/alignak
+# Define files to install:
+# from to
+# ---
+
+# systemd files: we use systemd as a default system loader
+# comments in this section must be inverted if we do not want to use systemd...
+systemd/* /lib/systemd/system/
+#systemV/default/alignak /etc/default/alignak/
+#systemV/init.d/alignak* /etc/init.d/
+
+# alignak default configuration files
+etc/alignak.cfg /etc/alignak/
+etc/alignak.ini /etc/alignak/
+etc/arbiter/* /etc/alignak/arbiter
 etc/daemons/* /etc/alignak/daemons/
 etc/certs/* /etc/alignak/certs/
-etc/alignak.cfg /etc/alignak/
-etc/arbiter/* /etc/alignak/arbiter
-systemd/* /lib/systemd/system/
+# Do not copy the samples files - useful to copy?
+#etc/samples /etc/alignak/samples

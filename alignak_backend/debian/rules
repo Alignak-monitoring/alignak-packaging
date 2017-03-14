@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --with python2 --install-layout=deb,quilt
+
+override_dh_clean:
+	rm -rf ./build
+	rm -rf ./Alignak.egg-info
+	dh_clean
+
+override_dh_install:
+	dh_install
+	#mv $(CURDIR)/debian/alignak-all/usr/etc/default $(CURDIR)/debian/alignak-all/etc/
+	rm -rf $(CURDIR)/debian/alignak-all/usr/etc/
+	rm -rf $(CURDIR)/debian/alignak-all/usr/var/
+
+override_dh_installdirs:
+	dh_installdirs
+
+override_dh_installinit:
+	dh_installinit --no-start --name=alignak
+
+make_dfsg:
+	rm test/modules

@@ -1,0 +1,7 @@
+#bin/init.d/alignak* /etc/init.d/
+#etc/default/alignak
+etc/daemons/* /etc/alignak/daemons/
+etc/certs/* /etc/alignak/certs/
+etc/alignak.cfg /etc/alignak/
+etc/arbiter/* /etc/alignak/arbiter
+systemd/* /lib/systemd/system/

@@ -21,8 +21,11 @@ Alignak is a new monitoring tool written in Python.
 The main goal of Alignak is to allow users to have a fully flexible
 architecture for their monitoring system that can easily scale to large
 environments.
-Alignak also provide interfaces with NDODB and Merlin database,
-Livestatus connector Alignak does not include any human interfaces.
+Alignak has several extensions to enrich its standard features:
+ - a full REST backend that allows to store the monitoring configuration and the live state
+ - a Web User interface to view and edit the monitored objects
+ - modules to extend the basic monitoring features: external commands, logs, ...
+ - checks packages to easily set-up new monitoring objects
 
 %package all
 Summary: Alignak Common files

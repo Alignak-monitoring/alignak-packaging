@@ -1,0 +1,108 @@
+#!/bin/sh
+#
+# Copyright (C) 2015-2016: Alignak team, see AUTHORS.txt file for contributors
+#
+# This file is part of Alignak.
+#
+# Alignak is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Alignak is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with Alignak.  If not, see <http://www.gnu.org/licenses/>.
+#
+
+# This file is copied to the */etc/default/alignak* folder, this to be found and read by the
+# alignak system startup script.
+
+# Main alignak variables:
+# - BIN is where the launch scripts are located
+#   (Free BSD sets to /usr/local/bin)
+# - ETC is where we store the configuration files
+#   (Free BSD sets to /usr/local/etc/alignak)
+# - VAR is where the libraries and plugins files are installed
+#   (Free BSD sets to /var/lib/alignak)
+# - RUN is the daemons working directory and where pid files are stored
+#   (Free BSD sets to /var/run/alignak)
+# - LOG is where we put log files
+#   (Free BSD sets to /var/log/alignak)
+#
+# Those variables define where the installer copied the files.
+BIN=/usr/local/bin
+ETC=/usr/local/etc/alignak
+VAR=/var/lib/alignak
+RUN=/var/run/alignak
+LOG=/var/log/alignak
+#--
+#-- Do not change the file content below this line until you really know what your are doing ;)
+#--
+
+# For the arbiter, we also define the name of the 2 main configuration files.
+# There may be 2 configuration files because tools like Centreon generate those...
+#
+
+### MONITORING CONFIGURATION ###
+# Alignak main configuration file
+ALIGNAKCFG="$ETC/alignak.cfg"
+if [ -z "$ALIGNAKCFG" ]; then
+    ALIGNAKCFG="$ETC/alignak.cfg"
+fi
+
+# Alignak secondary configuration file
+#ALIGNAKSPECIFICCFG="$ETC/alignak-specific.cfg"
+
+
+#
+# For each Alignak daemon, we define:
+# - the location of its configuration file
+# - the name of its launching script
+# - the location of its debug log file (if any is used)
+# - the location of its pid file
+#
+
+### ARBITER PART ###
+ARBITERCFG="$ETC/daemons/arbiterd.ini"
+ARBITERDAEMON=$BIN/alignak-arbiter
+ARBITERPID="$RUN/arbiterd.pid"
+ARBITERDEBUGFILE="$LOG/arbiter-debug.log"
+
+
+### SCHEDULER PART ###
+SCHEDULERCFG="$ETC/daemons/schedulerd.ini"
+SCHEDULERDAEMON=$BIN/alignak-scheduler
+SCHEDULERPID="$RUN/schedulerd.pid"
+SCHEDULERDEBUGFILE="$LOG/scheduler-debug.log"
+
+
+### POLLER PART ###
+POLLERCFG="$ETC/daemons/pollerd.ini"
+POLLERDAEMON=$BIN/alignak-poller
+POLLERPID="$RUN/pollerd.pid"
+POLLERDEBUGFILE="$LOG/poller-debug.log"
+
+
+### REACTIONNER PART ###
+REACTIONNERCFG="$ETC/daemons/reactionnerd.ini"
+REACTIONNERDAEMON=$BIN/alignak-reactionner
+REACTIONNERPID="$RUN/reactionnerd.pid"
+REACTIONNERDEBUGFILE="$LOG/reactionner-debug.log"
+
+
+### BROKER PART ###
+BROKERCFG="$ETC/daemons/brokerd.ini"
+BROKERDAEMON=$BIN/alignak-broker
+BROKERPID="$RUN/brokerd.pid"
+BROKERDEBUGFILE="$LOG/broker-debug.log"
+
+
+### RECEIVER PART ###
+RECEIVERCFG="$ETC/daemons/receiverd.ini"
+RECEIVERDAEMON=$BIN/alignak-receiver
+RECEIVERPID="$RUN/receiverd.pid"
+RECEIVERDEBUGFILE="$LOG/receiver-debug.log"

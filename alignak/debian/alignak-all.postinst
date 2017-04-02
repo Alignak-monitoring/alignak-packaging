@@ -20,9 +20,9 @@
 
 case "$1" in
     configure)
-        ## Create user and group
-        # Note: if the user exists, it's properties won't be changed (gid, home, shell)
-        adduser  --quiet --system --home /var/lib/alignak --no-create-home --group alignak || true
+        ## Create alignak user and group
+        # Note: if the user exists, his properties won't be changed (gid, home, shell)
+        adduser --quiet --system --home /var/lib/alignak --no-create-home --group alignak || true
 
         ## Create nagios group
         addgroup --system nagios || true
@@ -43,15 +43,14 @@ case "$1" in
             fi
         done
 
-        # SysV part
         if [ -f /etc/default/alignak ]; then
+            ## System V part
             sed -e 's:ETC=.*:ETC=/etc/alignak:g' \
                 -e 's:VAR=.*:VAR=/var/lib/alignak:g' \
                 -e 's:BIN=.*:BIN=/usr/bin:g' \
                 -e 's:RUN=.*:RUN=/var/run/alignak:g' \
                 -e 's:LOG=.*:LOG=/var/log/alignak:g' \
                 -i /etc/default/alignak
-
 
             ## Ensure alignak starts automatically
             update-rc.d -f alignak-arbiter defaults > /dev/null
@@ -63,6 +62,7 @@ case "$1" in
             update-rc.d -f alignak defaults > /dev/null
 
         else
+            ## Systemd part
             systemctl daemon-reload > /dev/null || :
             systemctl enable alignak-arbiter > /dev/null || :
             systemctl enable alignak-scheduler > /dev/null || :
@@ -72,6 +72,14 @@ case "$1" in
             systemctl enable alignak-receiver > /dev/null || :
         fi
 
+        ## Update Alignak configuration paths.cfg
+        sed -e 's:$ETC$=.*:$ETC$=/etc/alignak:g' \
+            -e 's:$VAR$=.*:$VAR$=/var/lib/alignak:g' \
+            -e 's:$RUN$=.*:$RUN$=/var/run/alignak:g' \
+            -e 's:$LOG$=.*:$LOG$=/var/log/alignak:g' \
+            -i /etc/alignak/arbiter/resource.d/paths.cfg
+
+        ## Update Alignak daemons configuration files
         for inifiles in /etc/alignak/daemons/*.ini; do
             sed -e 's:workdir=.*:workdir=/var/run/alignak:g' \
                 -e 's:logdir=.*:logdir=/var/log/alignak:g' \

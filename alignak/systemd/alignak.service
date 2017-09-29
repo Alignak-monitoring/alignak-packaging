@@ -4,8 +4,8 @@ After=syslog.target
 
 [Service]
 RemainAfterExit=yes
-ExecStart=/bin/systemctl start alignak-broker.service alignak-poller.service
-ExecStop=/bin/systemctl stop alignak-broker.service alignak-poller.service
+ExecStart=/bin/systemctl start alignak-reactionner.service alignak-receiver.service alignak-broker.service alignak-poller.service alignak-scheduler.service alignak-arbiter.service
+ExecStop=/bin/systemctl stop alignak-arbiter.service alignak-reactionner.service alignak-receiver.service alignak-broker.service alignak-poller.service alignak-scheduler.service
 TimeoutStopSec=3
 
 [Install]

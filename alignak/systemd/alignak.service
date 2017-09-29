@@ -1,0 +1,12 @@
+[Unit]
+Description=Alignak
+After=syslog.target
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/bin/systemctl start alignak-broker.service alignak-poller.service
+ExecStop=/bin/systemctl stop alignak-broker.service alignak-poller.service
+TimeoutStopSec=3
+
+[Install]
+WantedBy=multi-user.target
